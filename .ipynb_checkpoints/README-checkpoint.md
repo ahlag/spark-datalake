@@ -8,11 +8,11 @@ As their data engineer, you are tasked with building an ETL pipeline that extrac
 
 You'll be able to test your database and ETL pipeline by running queries given to you by the analytics team from Sparkify and compare your results with their expected results.
 
-### Project Description
+## Project Description
 
 In this project, you'll apply what you've learned on Spark and data lakes to build an ETL pipeline for a data lake hosted on S3. To complete the project, you will need to load data from S3, process the data into analytics tables using Spark, and load them back into S3. You'll deploy this Spark process on a cluster using AWS.
 
-#### Project Datasets
+### Project Datasets
 You'll be working with two datasets that reside in S3. Here are the S3 links for each:
 
 - Song data: `s3://udacity-dend/song_data`
@@ -44,8 +44,12 @@ log_data/2018/11/2018-11-12-events.json
 log_data/2018/11/2018-11-13-events.json
 ```
 
-### Setup
-1. Data
+Here's a peek at what the log data looks like.
+
+![log data](log-data.png)
+
+## Setup
+1. Offload Data
 ```
 $ unzip data/log_data.zip -d data
 $ unzip data/song_data.zip -d data
@@ -57,7 +61,7 @@ $ mkdir output
 $ pip install -r requirements.txt
 ```
 
-### Configuration
+## Configuration
 
 Set up a config file `dl.cfg` that uses the following schema. Put
 in the information for your IAM-Role that can read and write S3 buckets.
@@ -68,7 +72,7 @@ AWS_ACCESS_KEY_ID=
 AWS_SECRET_ACCESS_KEY=
 ```
 
-### ETL pipeline
+## ETL pipeline
 
 Simply run the ETL script.
 
@@ -78,4 +82,3 @@ python etl.py
 
 If the ETL pipeline was successful, a preview of the output data will be
 displayed.
-
