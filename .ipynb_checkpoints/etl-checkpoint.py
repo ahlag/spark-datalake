@@ -32,7 +32,7 @@ def process_song_data(spark, input_data, output_data):
             output_data : S3 bucket were dimensional tables in parquet format will be stored
     """
     # get filepath to song data file
-    song_data = os.path.join(input_data, "song-data/A/A/A/*.json")
+    song_data = os.path.join(input_data, "song_data/*/*/*/*.json")
     
     # read song data file
     df = spark.read.json(song_data)
@@ -104,7 +104,7 @@ def process_log_data(spark, input_data, output_data):
     print("time.parquet completed")
 
     # read in song data to use for songplays table
-    song_data = os.path.join(input_data, "song-data/A/A/A/*.json")
+    song_data = os.path.join(input_data, "song-data/*/*/*/*.json")
     song_df = spark.read.json(song_data)
 
     # extract columns from joined song and log datasets to create songplays table 
@@ -116,7 +116,7 @@ def process_log_data(spark, input_data, output_data):
         col('level').alias('level'),
         col('song_id').alias('song_id'),
         col('artist_id').alias('artist_id'),
-        col('ssessionId').alias('session_id'),
+        col('sessionId').alias('session_id'),
         col('location').alias('location'),
         col('userAgent').alias('user_agent'),
         col('year').alias('year'),
@@ -138,7 +138,7 @@ def main():
     """
     spark = create_spark_session()
     input_data = "s3a://udacity-dend/"
-    output_data = "s3a://mengheng-s3/"
+    output_data = "s3://ychang-output/"
     
     process_song_data(spark, input_data, output_data)    
     process_log_data(spark, input_data, output_data)

@@ -116,7 +116,7 @@ def process_log_data(spark, input_data, output_data):
         col('level').alias('level'),
         col('song_id').alias('song_id'),
         col('artist_id').alias('artist_id'),
-        col('ssessionId').alias('session_id'),
+        col('sessionId').alias('session_id'),
         col('location').alias('location'),
         col('userAgent').alias('user_agent'),
         col('year').alias('year'),
@@ -137,8 +137,8 @@ def main():
     Extract songs and events data from S3, Transform it into dimensional tables format, and Load it back to S3 in Parquet format
     """
     spark = create_spark_session()
-    input_data = "s3a://udacity-spark/"
-    output_data = "s3a://ychang-output/"
+    input_data = "s3a://udacity-dend/"
+    output_data = "s3://ychang-output/"
     
     process_song_data(spark, input_data, output_data)    
     process_log_data(spark, input_data, output_data)
