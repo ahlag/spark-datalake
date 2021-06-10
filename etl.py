@@ -32,7 +32,7 @@ def process_song_data(spark, input_data, output_data):
             output_data : S3 bucket were dimensional tables in parquet format will be stored
     """
     # get filepath to song data file
-    song_data = os.path.join(input_data, "song_data/A/A/A/*.json")
+    song_data = os.path.join(input_data, "song_data/*/*/*/*.json")
     
     # read song data file
     df = spark.read.json(song_data)
@@ -104,7 +104,7 @@ def process_log_data(spark, input_data, output_data):
     print("time.parquet completed")
 
     # read in song data to use for songplays table
-    song_data = os.path.join(input_data, "song-data/A/A/A/*.json")
+    song_data = os.path.join(input_data, "song-data/*/*/*/*.json")
     song_df = spark.read.json(song_data)
 
     # extract columns from joined song and log datasets to create songplays table 
