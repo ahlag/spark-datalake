@@ -16,7 +16,6 @@ def create_spark_session():
     spark = SparkSession \
                 .builder \
                 .config("spark.jars.packages", "org.apache.hadoop:hadoop-aws:2.7.0") \
-                .config("spark.hadoop.fs.s3a.impl","org.apache.hadoop.fs.s3a.S3AFileSystem") \
                 .config("spark.hadoop.fs.s3a.awsAccessKeyId", os.environ['AWS_ACCESS_KEY_ID']) \
                 .config("spark.hadoop.fs.s3a.awsSecretAccessKey", os.environ['AWS_SECRET_ACCESS_KEY']) \
                 .getOrCreate()
@@ -108,7 +107,7 @@ def process_log_data(spark, input_data, output_data):
                         .withColumnRenamed("userId","user_id")        \
                         .withColumnRenamed("timestamp","start_time")  \
                         .withColumnRenamed("sessionId","session_id")  \
-                        .withColumnRenamed("userAgent", "user_agent") \
+                        .withColumnRenamed("userAgent", "user_agent")
 
     # write songplays table to parquet files partitioned by year and month
     songplays_table.write.parquet(output_data + 'songplays/' + 'songplays.parquet',partitionBy=['start_time', 'user_id'])
