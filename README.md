@@ -15,8 +15,8 @@ In this project, you'll apply what you've learned on Spark and data lakes to bui
 ### Project Datasets
 You'll be working with two datasets that reside in S3. Here are the S3 links for each:
 
-- Song data: `s3://udacity-dend/song_data`
-- Log data: `s3://udacity-dend/log_data`
+- Song data: `s3a://udacity-dend/song_data`
+- Log data: `s3a://udacity-dend/log_data`
 
 1. Song Dataset
 
@@ -47,19 +47,6 @@ log_data/2018/11/2018-11-13-events.json
 Here's a peek at what the log data looks like.
 
 ![log data](log-data.png)
-
-## Setup
-1. Offload Data
-```
-$ unzip data/log_data.zip -d data
-$ unzip data/song_data.zip -d data
-$ mkdir output
-```
-
-2. Installation
-```
-$ pip install -r requirements.txt
-```
 
 ## Configuration
 
