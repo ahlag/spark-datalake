@@ -23,14 +23,6 @@ def create_spark_session():
     
     return spark
 
-# def create_spark_session():
-#     spark = SparkSession \
-#         .builder \
-#         .config("spark.jars.packages", "org.apache.hadoop:hadoop-aws:2.7.0") \
-#         .getOrCreate()
-#     return spark
-
-
 def process_song_data(spark, input_data, output_data):
     """
     Description: This function loads song_data from S3 and processes it by extracting the songs and artist tables
@@ -114,7 +106,7 @@ def process_log_data(spark, input_data, output_data):
     print("time.parquet completed")
 
     # read in song data to use for songplays table
-    song_data = os.path.join(input_data, "song-data/*/*/*/*.json")
+    song_data = os.path.join(input_data, "song_data/*/*/*/*.json")
     song_df = spark.read.json(song_data)
 
     # extract columns from joined song and log datasets to create songplays table 
