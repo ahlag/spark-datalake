@@ -12,13 +12,23 @@ config.read('dl.cfg')
 os.environ['AWS_ACCESS_KEY_ID']=config['KEYS']['AWS_ACCESS_KEY_ID']
 os.environ['AWS_SECRET_ACCESS_KEY']=config['KEYS']['AWS_SECRET_ACCESS_KEY']
 
-
 def create_spark_session():
     spark = SparkSession \
-        .builder \
-        .config("spark.jars.packages", "org.apache.hadoop:hadoop-aws:2.7.0") \
-        .getOrCreate()
+                .builder \
+                .config("spark.jars.packages", "org.apache.hadoop:hadoop-aws:2.7.0") \
+                .config("spark.hadoop.fs.s3a.impl","org.apache.hadoop.fs.s3a.S3AFileSystem") \
+                .config("spark.hadoop.fs.s3a.awsAccessKeyId", os.environ['AWS_ACCESS_KEY_ID']) \
+                .config("spark.hadoop.fs.s3a.awsSecretAccessKey", os.environ['AWS_SECRET_ACCESS_KEY']) \
+                .getOrCreate()
+    
     return spark
+
+# def create_spark_session():
+#     spark = SparkSession \
+#         .builder \
+#         .config("spark.jars.packages", "org.apache.hadoop:hadoop-aws:2.7.0") \
+#         .getOrCreate()
+#     return spark
 
 
 def process_song_data(spark, input_data, output_data):
@@ -138,7 +148,7 @@ def main():
     """
     spark = create_spark_session()
     input_data = "s3a://udacity-dend/"
-    output_data = "s3://ychang-output/"
+    output_data = "s3a://ychang-output/"
     
     process_song_data(spark, input_data, output_data)    
     process_log_data(spark, input_data, output_data)
