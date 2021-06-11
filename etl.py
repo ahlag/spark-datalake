@@ -1,8 +1,9 @@
 import configparser
+from datetime import datetime
 import os
-import pyspark.sql.functions as F
-
 from pyspark.sql import SparkSession
+
+import pyspark.sql.functions as F
 from pyspark.sql.window import Window
 from datetime import datetime
 
@@ -34,7 +35,7 @@ def process_song_data(spark, input_data, output_data):
             output_data : S3 bucket were dimensional tables in parquet format will be stored
     """
     # get filepath to song data file
-    song_data = input_data + "song_data/*/*/*/"
+    song_data = input_data + "song_data/A/A/A/"
     
     # read song data file
     df = spark.read.json(song_data)
@@ -96,7 +97,7 @@ def process_log_data(spark, input_data, output_data):
     time_table.write.parquet(output_data + 'time/' + 'time.parquet', partitionBy=['start_time'])
 
     # read in song data to use for songplays table
-    song_df = spark.read.json(input_data+'song_data/*/*/*/*.json')
+    song_df = spark.read.json(input_data+'song_data/A/A/A/*.json')
     
     # join song_df and log_df
     song_log_joined_table = log_df.join(song_df, (log_df.song == song_df.title) & (log_df.artist == song_df.artist_name) & (log_df.length == song_df.duration), how='inner')
